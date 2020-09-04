@@ -1,7 +1,19 @@
 <template>
-  <div class="table">
+  <div class="table" v-if="myItems.length">
     <v-row style="margin-bottom: 20px;">
-      <v-btn style="padding: 40px;" v-if="selected.length"  fab  fixed right bottom x-small  color="error">remove</v-btn>
+      <v-btn
+        @click="removeElement"
+        style="padding: 40px;"
+        v-if="selected.length"
+        fab
+        fixed
+        right
+        bottom
+        x-small
+        color="error"
+      >
+        <v-icon class="remove">delete_forever</v-icon>
+      </v-btn>
     </v-row>
     <v-row align="center" justify="space-between">
       <v-data-table
@@ -27,12 +39,8 @@ export default {
       cities: [],
       selected: [],
       headers: [
-        {text: 'id', align: "start", value: 'id'},
-        {
-          text: "City",
-          align: "start",
-          value: "city",
-        },
+        { text: "id", align: "start", value: "id" },
+        { text: "City", align: "start", value: "city" },
         { text: "Температура °C", value: "temperatures" },
         { text: "Минимальная °C", value: "min" },
         { text: "Максимальная °C", value: "max" },
@@ -54,7 +62,12 @@ export default {
           humidity: el.temperature.humidity,
         };
       });
-      this.cities = resData
+      this.cities = resData;
+    },
+  },
+  methods: {
+    removeElement() {
+      this.$store.dispatch('removeRowFromState', this.selected)
     },
   },
   computed: {
@@ -65,3 +78,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.table {
+  .remove {
+    font-size: 3rem !important;
+  }
+}
+</style>
