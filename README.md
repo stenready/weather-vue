@@ -8,4 +8,4 @@
 ```
 
 ### Author
-Sten Ready  [Configuration Reference](mastars2319@gmail.com).
+Sten Ready  mastars2319@gmail.com
