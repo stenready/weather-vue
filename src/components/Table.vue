@@ -50,7 +50,7 @@ export default {
     };
   },
   watch: {
-    myItems(value) {
+    myItems(value) { // генерция таблицы
       const resData = value.map((el) => {
         return {
           id: el.id,

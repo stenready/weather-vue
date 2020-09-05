@@ -16,6 +16,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    DOWNLOAD_FROM_STORE(state, data) {
+      state.cities = JSON.parse(data)
+    },
     REMOVE_FROM_STATE(state, data) {
       const res = state.cities.filter( el => {
         const element = data.find( c => c.id === el.id)
@@ -31,6 +34,17 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    saveToStore({ commit, getters }) {
+      const state = getters.getCities
+      if( state.length > 0 ) localStorage.setItem('cities', JSON.stringify(state))
+    },
+    downloadFromStore({ commit }) {
+      let cities = localStorage.getItem('cities');
+      if(cities) commit('DOWNLOAD_FROM_STORE', cities)
+    },
+    cleareStore({ commit }) {
+      localStorage.setItem('cities', [])
+    },
     addToTableState({ commit }, town) {
       commit('ADD_TO_TABLE_STATE', town)
     },

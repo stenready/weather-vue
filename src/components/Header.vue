@@ -20,6 +20,20 @@
             color="primary"
           >cleare</v-btn>
         </v-card-text>
+        <div class="action_wrap">
+          <v-btn @click="$store.dispatch('saveToStore')" color="secondary" small class="action_store">
+            Save Store
+            <v-icon right>save</v-icon>
+          </v-btn>
+          <v-btn @click="$store.dispatch('downloadFromStore')" color="primary" small class="action_store">
+            Download Store
+            <v-icon right>mdi-cloud-upload</v-icon>
+          </v-btn>
+          <v-btn @click="$store.dispatch('cleareStore')" color="warning" small class="action_store">
+            Clear Store
+            <v-icon right>delete_sweep</v-icon>
+          </v-btn>
+        </div>
       </v-card>
 
       <!-- card output -->
@@ -64,6 +78,7 @@
         </v-card-text>
         <v-btn @click="addToTable" style="margin: 15px;" x-large color="success" dark>Add to table</v-btn>
       </v-card>
+
 
       <!-- error log -->
       <h3 v-else class="error-message">{{ error }}</h3>
@@ -137,6 +152,12 @@ export default {
 </script>
 
 <style lang="scss">
+.action_wrap{
+  margin: 5px 15px
+}
+.action_store{
+  margin-right: 15px;
+}
 .super_header_app {
   font-weight: 400;
   font-size: 2rem !important;
