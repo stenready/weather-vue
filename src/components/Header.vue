@@ -1,4 +1,5 @@
 <template>
+
   <div class="header">
     <v-row align="center" justify="space-between">
       <!-- card input -->
@@ -14,6 +15,7 @@
 
           <v-btn @click="getWeather" :rounded="true" color="success">Search weather</v-btn>
           <v-btn
+            :disabled="!city"
             style="margin-left: 10px;"
             @click="cleareSearch"
             :rounded="true"
@@ -25,7 +27,7 @@
             Save Store
             <v-icon right>save</v-icon>
           </v-btn>
-          <v-btn @click="$store.dispatch('downloadFromStore')" color="primary" small class="action_store">
+          <v-btn @click="downloadFromStore" color="primary" small class="action_store">
             Download Store
             <v-icon right>mdi-cloud-upload</v-icon>
           </v-btn>
@@ -36,8 +38,9 @@
         </div>
       </v-card>
 
+      <Loader v-if="loading" />
       <!-- card output -->
-      <v-card v-if="city">
+      <v-card v-if="city && !loading">
         <v-card-title class="text-h3 response_title">
           <div style="display: flex; align-items: center;">
             <span>{{ city.cityName }}</span>
@@ -81,7 +84,7 @@
 
 
       <!-- error log -->
-      <h3 v-else class="error-message">{{ error }}</h3>
+      <h3 v-else-if="!city && !loading" class="error-message">{{ error }}</h3>
     </v-row>
   </div>
 </template>
@@ -96,6 +99,7 @@ export default {
       search: "",
       city: null,
       error: "",
+      loading: false,
     };
   },
 
@@ -115,6 +119,9 @@ export default {
   },
 
   methods: {
+    downloadFromStore() {
+      this.$store.dispatch('downloadFromStore')
+    },
     addToTable() {
       const data = {
         id: this.city.id,
@@ -134,6 +141,7 @@ export default {
     async getWeather() {
       try {
         if (this.search.length > 0) {
+          this.loading = true
           const response = await this.$store.dispatch(
             "fetchWeather",
             this.search
@@ -141,10 +149,12 @@ export default {
           this.city = response;
           this.search = "";
           this.error = null
+          this.loading = false
         }
       } catch (e) {
         this.city = null;
         this.error = "Такой город не был найден, попробуйте еще раз";
+        this.loading = false
       }
     },
   },
