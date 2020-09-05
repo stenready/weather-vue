@@ -2,28 +2,10 @@
 
 ## Project setup
 ```
-npm install
+Интересный погодный проект
+Технологии: Vue, Vuex, Vuetify
+Есть возможность искать погоду по всему миру, сохранять - загружать интересные Вам города в LocalStorage
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Author
+Sten Ready  [Configuration Reference](mastars2319@gmail.com).
