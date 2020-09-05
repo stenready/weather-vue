@@ -237,7 +237,7 @@ export default {
     margin-bottom: 5px;
   }
   .super_header_app {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
   }
   .v-icon{
     font-size: 15px !important;
