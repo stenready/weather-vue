@@ -80,6 +80,7 @@ export default new Vuex.Store({
       
       response.data.temperature = getTemperature(response.data)
       response.data.cityName=city
+      response.data.city = city
 
       response.data.icon={
         img: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,

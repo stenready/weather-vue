@@ -83,7 +83,14 @@
             </div>
           </div>
         </v-card-text>
-        <v-btn class="add_to_table" @click="addToTable" style="margin: 15px;" x-large color="success" dark>Add to table</v-btn>
+        <v-btn
+          class="add_to_table"
+          @click="addToTable"
+          style="margin: 15px;"
+          x-large
+          color="success"
+          dark
+        >Add to table</v-btn>
       </v-card>
 
       <!-- error log -->
@@ -222,15 +229,24 @@ export default {
   }
   .action_wrap {
     display: flex;
+    flex-wrap: wrap;
+  }
+  .action_store {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
   }
   .super_header_app {
     font-size: 1.5rem !important;
+  }
+  .v-icon{
+    font-size: 15px !important;
   }
   .v-input {
     width: 100%;
     margin-right: 0 !important;
   }
-  .add_to_table{
+  .add_to_table {
     width: 95%;
     margin: 0 auto;
   }

@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <v-row>
-        <v-col fluid class="mx-auto" :sm="12" :lg="8">
+        <v-col  class="mx-auto" :sm="12" :lg="8">
           <v-main>
             <Header />
             <Table :key="stateCitiesLength" />
