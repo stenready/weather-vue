@@ -1,5 +1,4 @@
 <template>
-
   <div class="header">
     <v-row align="center" justify="space-between">
       <!-- card input -->
@@ -23,7 +22,12 @@
           >cleare</v-btn>
         </v-card-text>
         <div class="action_wrap">
-          <v-btn @click="$store.dispatch('saveToStore')" color="secondary" small class="action_store">
+          <v-btn
+            @click="$store.dispatch('saveToStore')"
+            color="secondary"
+            small
+            class="action_store"
+          >
             Save Store
             <v-icon right>save</v-icon>
           </v-btn>
@@ -79,9 +83,8 @@
             </div>
           </div>
         </v-card-text>
-        <v-btn @click="addToTable" style="margin: 15px;" x-large color="success" dark>Add to table</v-btn>
+        <v-btn class="add_to_table" @click="addToTable" style="margin: 15px;" x-large color="success" dark>Add to table</v-btn>
       </v-card>
-
 
       <!-- error log -->
       <h3 v-else-if="!city && !loading" class="error-message">{{ error }}</h3>
@@ -113,14 +116,14 @@ export default {
         min: parseInt(this.city.main.temp_min - kelvin),
         max: parseInt(this.city.main.temp_max - kelvin),
         humidity: this.city.main.humidity,
-        pressure: this.city.main.pressure
+        pressure: this.city.main.pressure,
       };
     },
   },
 
   methods: {
     downloadFromStore() {
-      this.$store.dispatch('downloadFromStore')
+      this.$store.dispatch("downloadFromStore");
     },
     addToTable() {
       const data = {
@@ -141,20 +144,20 @@ export default {
     async getWeather() {
       try {
         if (this.search.length > 0) {
-          this.loading = true
+          this.loading = true;
           const response = await this.$store.dispatch(
             "fetchWeather",
             this.search
           );
           this.city = response;
           this.search = "";
-          this.error = null
-          this.loading = false
+          this.error = null;
+          this.loading = false;
         }
       } catch (e) {
         this.city = null;
         this.error = "Такой город не был найден, попробуйте еще раз";
-        this.loading = false
+        this.loading = false;
       }
     },
   },
@@ -162,10 +165,10 @@ export default {
 </script>
 
 <style lang="scss">
-.action_wrap{
-  margin: 5px 15px
+.action_wrap {
+  margin: 5px 15px;
 }
-.action_store{
+.action_store {
   margin-right: 15px;
 }
 .super_header_app {
@@ -207,5 +210,29 @@ export default {
 .v-card {
   margin-top: 10px;
   width: 100%;
+}
+@media screen and (max-width: 600px) {
+  .v-card__text {
+    flex-direction: column;
+    .v-btn {
+      margin-top: 15px;
+      width: 100%;
+      margin-left: 0 !important;
+    }
+  }
+  .action_wrap {
+    display: flex;
+  }
+  .super_header_app {
+    font-size: 1.5rem !important;
+  }
+  .v-input {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+  .add_to_table{
+    width: 95%;
+    margin: 0 auto;
+  }
 }
 </style>
